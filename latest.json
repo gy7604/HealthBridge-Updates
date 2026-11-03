@@ -1,0 +1,10 @@
+{
+  "packageName": "com.gy7604.healthbridge",
+  "versionCode": 5,
+  "versionName": "0.1.4",
+  "apkUrl": "https://github.com/gy7604/HealthBridge-Updates/releases/download/v0.1.4/HealthBridge-0.1.4.apk",
+  "sha256": "b38d5cf0964a24185bc94916e12d00a0c3c0982155f9de788d28ffecaaf5cca1",
+  "sizeBytes": 10751265,
+  "signingCertSha256": "9b76be478ce899ab17caba5282606b08d7f6feba074a94e9790017db2b77a69d",
+  "notes": "업데이트 기본 주소를 공식 HealthBridge 배포 경로로 연결했습니다.\n기존 사용자 지정 업데이트 주소를 유지하고 ‘기본 주소 사용’ 선택을 추가했습니다.\n공식 APK 다운로드의 제한된 HTTPS 이동과 파일 크기·SHA256 검증을 개선했습니다.\n기존 앱 데이터와 건강정보·서버 설정은 유지합니다."
+}
