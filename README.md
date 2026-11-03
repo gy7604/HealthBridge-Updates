@@ -1,2 +1,10 @@
-# HealthBridge-Updates
-HealthBridge app update distribution. Source and health data remain private. Owner approval required before APK publication.
+# HealthBridge 앱 업데이트 배포
+
+이 저장소는 승인된 HealthBridge 앱 업데이트 파일을 제공하기 위한 배포 전용 공간입니다.
+
+현재 APK·실제 업데이트 목록은 게시하지 않았고 게시 도구도 비활성 상태입니다. 앱 공개와 설치는 정확한 버전별 사용자 승인 후에만 진행합니다.
+
+앱 소스·건강정보·사용 기록·백업·키·비밀번호·토큰은 이 저장소에 보관하지 않습니다. 기존 HealthBridge 비공개 저장소·서버·DB·PC 빌더는 그대로 유지합니다.
+
+빌드는 요청형 GitHub Actions가 기본이며 PC는 사용자가 선택할 때만 사용합니다. 이 저장소에서는 앱을 빌드하거나 설치하지 않습니다. push·PR·예약으로 반복 빌드하는 설정은 추가하지 않습니다.
+
