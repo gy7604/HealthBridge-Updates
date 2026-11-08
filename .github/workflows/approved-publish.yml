@@ -1,4 +1,4 @@
-# Owner requests only; HEALTHBRIDGE_PUBLICATION_ENABLED remains absent/off.
+# Owner requests only; preserve the existing activation setting and per-version approval.
 name: Owner-approved existing HealthBridge APK
 on:
   issue_comment:
@@ -6,7 +6,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: healthbridge-owner-approved-publication
+  group: ${{ github.actor == 'gy7604' && github.event.issue.number == 1 && startsWith(github.event.comment.body, '/healthbridge-publish approve ') && 'healthbridge-owner-approved-publication' || format('healthbridge-file-ignored-{0}', github.run_id) }}
   cancel-in-progress: false
 jobs:
   publish:
@@ -18,21 +18,26 @@ jobs:
       github.event.comment.created_at == github.event.comment.updated_at &&
       startsWith(github.event.comment.body, '/healthbridge-publish approve ') &&
       vars.HEALTHBRIDGE_PUBLICATION_ENABLED == 'true' &&
+      !github.event.issue.pull_request &&
       github.event.issue.number == 1 &&
       github.run_attempt == 1
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
       contents: write
+      issues: write
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: 7c12e3032d0caa6cdfc2b0d22da230804c5cb49b
+          ref: 3c36381fb1ee021ed2d395a98792f57f275342d8
           persist-credentials: false
           sparse-checkout: tools/release-control
       - uses: actions/setup-python@v5
         with:
           python-version: '3.14'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -45,4 +50,5 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           HEALTHBRIDGE_PUBLICATION_ENABLED: ${{ vars.HEALTHBRIDGE_PUBLICATION_ENABLED }}
           HEALTHBRIDGE_PUBLICATION_ISSUE: '1'
+          PUBLISHER_CONTROLLER_SHA: 3c36381fb1ee021ed2d395a98792f57f275342d8
         run: python -B tools/release-control/healthbridge_publish.py --event "$GITHUB_EVENT_PATH"
