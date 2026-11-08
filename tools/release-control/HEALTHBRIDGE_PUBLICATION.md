@@ -1,20 +1,26 @@
-# HealthBridge 승인 후 게시
+# HealthBridge 승인 후 게시 — 암호화 전달 검토본
 
-소유자 전용 이슈에서 정확한 후보 요청 ID, snapshot SHA, 버전 코드, APK SHA256, 기존 feed blob SHA, 전달 ZIP SHA256, 승인된 파일 링크와 변경 설명을 고정한다. 파일은 candidate.apk와 비밀 없는 receipt.json 두 개만 허용한다. 원래 인증서·패키지·버전·파일 해시를 실제 APK 바이트와 다시 비교한다.
+이 변경은 배포 전용 게시기의 파일 전달 방식만 보완하는 검토본이다. 앱 소스·실제 APK·latest.json·기존 v0.1.4/code5·건강정보·사용 기록·키·계정·MCP 서비스는 이 저장소 작업으로 바꾸지 않는다. 검토본을 작성했다고 실제 게시기가 활성화되거나 관리 MCP가 새 대상을 지원한 것은 아니다.
 
-최초 게시 전에는 APK와 latest.json이 없었다. 2026-11-03 사용자의 명시 승인 후 0.1.4/code5를 empty baseline으로 처음 게시했다. 현재는 release/latest.json이 존재하므로 empty를 다시 사용하지 않는다. 이후에는 실제 현재 feed blob을 고정하고 더 높은 버전과 버전별 승인을 확인한다. 설치 전 휴대폰의 실제 버전·서명을 별도로 확인한다.
+기존 파서는 단기 파일 주소를 승인문에 포함해야 했다. 새 형식은 주소 대신 sealed-v1 표식만 허용한다. 소유자 원본 승인·15분 유효기간·정확한 후보/기준 feed/파일 해시·기존 패키지/서명·첫 실행·게시 활성화 조건은 유지한다.
 
-이후 버전은 기존 latest.json blob SHA를 지정하며 기존 공개 release와 feed가 일치하고 버전 코드가 증가해야 한다. 원본 소유자 댓글, 15분 유효기간, 고정 helper, 첫 실행, 별도 HEALTHBRIDGE_PUBLICATION_ENABLED 게이트를 확인한다.
+에이전트용 승인 형식:
+`/healthbridge-publish approve REQUEST_ID SNAPSHOT_SHA VERSION_CODE APK_SHA256 CURRENT_FEED_BLOB_SHA OUTER_ZIP_SHA256 sealed-v1`
 
-명령 형식은 에이전트용이며 사용자가 외울 필요는 없다.
+빈 줄 뒤에는 사용자에게 검토한 변경 설명만 넣는다. 원문 파일 주소를 승인문이나 설명에 넣지 않는다. 기존 v0.1.4와 feed가 있으므로 현재 게시에서 empty를 다시 사용하지 않는다. 기존 첫 게시 코드·합성 보호 검사는 보존한다.
 
-`/healthbridge-publish approve REQUEST_ID SNAPSHOT_SHA VERSION_CODE APK_SHA256 BASELINE_FEED_BLOB_SHA_OR_empty OUTER_ZIP_SHA256 APPROVED_FILE_URL`
+## 전달 절차
 
-빈 줄 뒤에 사용자에게 보여 준 변경 설명을 넣는다. 링크는 승인된 *.oaiusercontent.com/files/ 파일 참조만 허용하고 redirect는 거부한다. 공개 승인 전에는 비공개 후보 링크를 공개 이슈에 기록하지 않는다. 앱 소스·건강정보·키·로그는 전달하지 않는다.
+원래 승인 이벤트와 네이티브 첫 소유자 실행을 다시 확인한 수신기가 메모리 안의 일회용 RSA 공개키 challenge를 낸다. 관리 MCP는 원본 소유자 승인·bot·run·고정 제어기·기한을 독립적으로 확인한 뒤 같은 문맥의 HealthBridge 참조만 암호화한다. 댓글에는 암호문만 전달한다. Python 게시기는 Node 수신기와 비공개 파이프로 주소를 받고 기존 파일 출처·ZIP/내부 APK·실제 원래 서명·버전/해시·현재 공개 기준을 검증한다.
 
-게시 순서는 검증 → 새 draft 1회 생성 → APK 업로드·서버 해시 확인 → 승인·기존 상태 재확인 → release 공개 → latest.json 조건부 갱신이다. 첫 게시 중 생긴 기존 draft, 이미 생성된 feed, 승인 변경·만료, 서명·해시 불일치, 부분 실패를 자동으로 재시도하거나 덮어쓰지 않는다. release 공개 후 feed 실패는 수동 조정이 필요한 부분 완료다.
+이 검토본의 수신기는 앱별 저장소/이슈/기능 플래그가 맞아야 동작한다. HealthBridge의 기존 issue1과 HEALTHBRIDGE_PUBLICATION_ENABLED 조건을 유지한다. 다른 앱의 플래그나 이슈로 우회하지 않는다. 일회용 암호화 키는 영구 저장하거나 기존 앱 서명키를 바꾸지 않는다. 키·URL을 명령 인자·일반 로그·소스에 남기지 않는다.
 
-게시 기능은 사용자 승인으로 활성화했다. APK 공개·설치·앱 내 업데이트는 계속 실제 버전별 별도 승인을 받는다. 기존 비공개 앱 소스·서버·DB·MCP·PC 빌더는 이 도구가 사용하거나 변경하지 않는다. 이 저장소에서는 APK를 빌드·실행·설치하지 않는다.
+## 현재 실제 서비스와의 경계
 
-로컬 합성 보호 검사는 `python -B -m unittest discover -s tools/release-control -v`로 실행한다. 실제 서버 업로드·release/feed 일치와 인증 없는 다운로드는 [Actions 41585608752](https://github.com/gy7604/HealthBridge-Updates/actions/runs/41585608752) 및 공개 파일 재검증으로 완료했다. 앱에 사용한 실제 Java 다운로드 코드를 같은 바이트로 컴파일해 공개 APK를 받고 SDK로 원래 서명을 재검증했다. APK SHA256은 `b38d5cf0964a24185bc94916e12d00a0c3c0982155f9de788d28ffecaaf5cca1`, 최초 feed blob은 `afa5e26d269348ed7d6b23a752d23f33133352ae`다. 이 결과는 휴대폰 설치·앱 내 업데이트·실제 건강정보 연동 시험이 아니며 재빌드도 하지 않았다.
+관리 MCP의 실제 배포 버전8은 아직 sangil/compya만 지원한다. HealthBridge용 공개 게시기 검토본과 관리 MCP 지원 확장 검토본을 함께 검토하고, 실제 관리서비스 수정·빌드·배포 및 활성 게시기 반영을 별도 허용받기 전에는 새 게시 요청을 보내지 않는다. 공개 주소 전달 방식으로 되돌리는 우회는 없다. 지금은 실제 challenge·암호화 전달·Release/feed 쓰기·앱 빌드·설치·서버 호출을 하지 않는다.
 
+고정 workflow는 이 검토본의 파일 검증·수신 코드를 별도 불변 SHA로 checkout하도록 준비한다. 승인형 게시기 반영은 실제 공개 앱 업데이트 승인과 다르다. 이후 제품 게시에는 정확한 새 버전·소스·파일·원래 서명·현재 공개 기준에 대한 명시 승인이 다시 필요하다.
+
+## 검증
+
+Python의 기존 게시 보호 검사와 비공개 파이프/원문 주소 거부 검사를 합성 데이터로 실행한다. Node 수신기의 round-trip·변조·문맥·만료·다른 소유자/저장소·중복 전달 거부 검사도 가짜 API로만 실행한다. 앱 빌드·실제 네트워크·게시·기기 검증을 뜻하지 않는다.

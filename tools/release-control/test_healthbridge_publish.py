@@ -38,7 +38,7 @@ class PublisherTests(unittest.TestCase):
             for name,data in (extras or {}).items(): z.writestr(name,data)
     def refresh_request(self):
         self.outer=hashlib.sha256((self.root/'approved.zip').read_bytes()).hexdigest()
-        self.event['comment']['body']=f'/healthbridge-publish approve build-1 {"a"*40} 4 {self.digest} {"c"*40} {self.outer} https://download.oaiusercontent.com/files/example\n\n승인한 변경 내용'
+        self.event['comment']['body']=f'/healthbridge-publish approve build-1 {"a"*40} 4 {self.digest} {"c"*40} {self.outer} sealed-v1\n\n승인한 변경 내용'
         self.request=sp.validate_event(self.event,self.now,42)
     def verify(self,path):
         self.assertEqual(path.read_bytes(),self.apk)
@@ -210,6 +210,44 @@ class PublisherTests(unittest.TestCase):
                  GITHUB_RUN_ATTEMPT='1',SANGIL_PUBLICATION_ENABLED='true')
         with patch.dict(os.environ,env,clear=True),patch.object(sys,'argv',['publisher','--event','not-created.json']):
             with self.assertRaisesRegex(ValueError,'Separately enabled'):sp.main()
+
+
+    def test_public_approval_never_accepts_a_plain_private_file_reference(self):
+        private='https://synthetic.oaiusercontent.com/files/fixture-only'
+        for body in (self.event['comment']['body'].replace('sealed-v1',private),
+                     self.event['comment']['body']+'\n'+private):
+            event=copy.deepcopy(self.event);event['comment']['body']=body
+            with self.assertRaises(ValueError):sp.validate_event(event,self.now,42)
+
+    def test_file_reference_is_received_only_through_bounded_private_pipe(self):
+        private='https://synthetic.oaiusercontent.com/files/fixture-only'
+        result=Mock(returncode=0,stdout=json.dumps({'url':private}),stderr='')
+        event=copy.deepcopy(self.event);event['issue']['number']=1
+        with patch.object(sp.subprocess,'run',return_value=result) as run:
+            self.assertEqual(sp.receive_file_url(event,self.request,1),private)
+        args,kwargs=run.call_args
+        self.assertEqual(args[0][0],'node')
+        self.assertEqual(args[0][-1],'--receive-private-pipe')
+        self.assertNotIn(private,json.dumps(args))
+        payload=json.loads(kwargs['input'])
+        self.assertEqual(payload['appId'],'healthbridge')
+        self.assertEqual(payload['requestId'],self.request['requestId'])
+        self.assertTrue(kwargs['capture_output'])
+        self.assertEqual(kwargs['timeout'],205)
+
+    def test_failed_or_malformed_private_transfer_never_calls_publication(self):
+        for result in (Mock(returncode=1,stdout='',stderr='synthetic-secret'),
+                       Mock(returncode=0,stdout='x'*13001,stderr=''),
+                       Mock(returncode=0,stdout=json.dumps({'url':'https://evil.invalid/files/x'}),stderr=''),
+                       Mock(returncode=0,stdout=json.dumps({'url':'https://synthetic.oaiusercontent.com/files/x','extra':True}),stderr='')):
+            with self.subTest(result=result),patch.object(sp.subprocess,'run',return_value=result),self.assertRaises(ValueError):
+                sp.receive_file_url(self.event,self.request,1)
+        self.assertEqual(self.writes(),[])
+
+    def test_private_transfer_cannot_use_another_control_issue(self):
+        with patch.object(sp.subprocess,'run') as run:
+            with self.assertRaises(ValueError):sp.receive_file_url(self.event,self.request,42)
+            run.assert_not_called()
 
 
 if __name__=='__main__':unittest.main()
