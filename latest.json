@@ -1,10 +1,10 @@
 {
   "packageName": "com.gy7604.healthbridge",
-  "versionCode": 6,
-  "versionName": "0.2.0",
-  "apkUrl": "https://github.com/gy7604/HealthBridge-Updates/releases/download/v0.2.0/HealthBridge-0.2.0.apk",
-  "sha256": "62c383ba23ed171525872265054e96e74197c480ac935c0cbcb05f39fc8871f1",
+  "versionCode": 7,
+  "versionName": "0.2.1",
+  "apkUrl": "https://github.com/gy7604/HealthBridge-Updates/releases/download/v0.2.1/HealthBridge-0.2.1.apk",
+  "sha256": "4dbdb2322b0479edcbabf680949d21be78ac78ee9eff8ce3743bce8c512f3ce4",
   "sizeBytes": 10792225,
   "signingCertSha256": "9b76be478ce899ab17caba5282606b08d7f6feba074a94e9790017db2b77a69d",
-  "notes": "HealthBridge 0.2.0 정식 건강 대시보드 업데이트\n- 체중·체지방률·혈압·걸음 수·수면 세션·최근 조회 시각 카드 추가\n- 체중·체지방률 7일/30일, 걸음 수 7일 추이 그래프 추가\n- 일부 수집 실패 시 기존 암호화 기록 보존, 수면 중복 기록 합산 개선\n- 기존 앱 패키지·서명·사용자 건강기록·설정 유지, 외부 건강정보 전송 기능 비활성\n- 설치 및 실제 Health Connect 데이터 연동은 휴대전화에서 별도 확인 필요"
+  "notes": "HealthBridge 0.2.1 화면 및 사용성 개선\n- 첫 화면 상단의 큰 앱 이름과 소개 문구를 삭제하고 건강 대시보드를 위로 올렸습니다.\n- 버전 정보를 페이지 맨 아래로 이동했습니다.\n- Android 시스템 내비게이션 바·제스처 영역을 반영해 하단 버튼 가림과 터치 불편을 개선했습니다.\n- 주요 버튼과 그래프 선택 영역의 터치 높이, 카드·상태 메시지 간격을 정리했습니다.\n- 기존 건강 기록·앱 설정·암호화 저장 방식과 동일한 서명 인증서를 유지합니다. 외부 건강 정보 전송은 활성화하지 않았습니다.\n- 실제 휴대전화의 가로/세로 및 폴더블 화면, 설치 후 기록 보존은 기기에서 확인이 필요합니다."
 }
