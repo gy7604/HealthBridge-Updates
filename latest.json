@@ -1,10 +1,10 @@
 {
   "packageName": "com.gy7604.healthbridge",
-  "versionCode": 12,
-  "versionName": "0.5.0",
-  "apkUrl": "https://github.com/gy7604/HealthBridge-Updates/releases/download/v0.5.0/HealthBridge-0.5.0.apk",
-  "sha256": "a36022a8a518742e43463dae0f7cf707339b2b913acad661dfcd2e6878d3f3a3",
-  "sizeBytes": 10943777,
+  "versionCode": 13,
+  "versionName": "0.6.0",
+  "apkUrl": "https://github.com/gy7604/HealthBridge-Updates/releases/download/v0.6.0/HealthBridge-0.6.0.apk",
+  "sha256": "ae099d44a65da5900c2acbb79a63af244cebd8ca5f1e2fd067bc989dc737f266",
+  "sizeBytes": 10980641,
   "signingCertSha256": "9b76be478ce899ab17caba5282606b08d7f6feba074a94e9790017db2b77a69d",
-  "notes": "0.5.0(code12) 정식 업데이트\n\n수동 동기화 후 최근 걸음·심박·수면 표시를 보완하고, 선택 공유·인증·읽기 조회·분석의 합성 검증 기반을 준비했습니다. 서버 건강정보 전송·ChatGPT 실제 연결·AI 연동은 계속 꺼져 있습니다. 실제 로그인·계정 연결·외부 건강정보 전송은 켜지 않습니다.\n\n사용자가 이 서명 후보를 설치한 뒤 기존 기록·권한·설정 보존과 수동 동기화 후 걸음·심박·수면 정상 표시를 확인했습니다. 기존 패키지·서명·암호화 저장소·설정과 권한 선언을 유지합니다. 앱 삭제나 데이터 초기화 없이 기존 앱 위에 업데이트하세요.\n\n검증된 동일 APK를 재빌드·재서명 없이 공개합니다. 합성·회귀 95개와 연결 준비 회귀 11개가 포함된 Android 단위 검사·컴파일·원래 키 서명을 통과했습니다. 운영 DB 변경·유료 자원 사용은 하지 않습니다. 6시간 자동동기화 고도화는 후순위입니다."
+  "notes": "0.6.0(code13) 정식 업데이트\n\n본인 근무일 전용 조회 권한의 기간 제한·만료·철회를 합성 자료로 검증했습니다. 실제 일정 조회, 서버 건강정보 전송, ChatGPT 및 AI 연결은 꺼져 있습니다.\n\n사용자는 이 서명 APK 설치 후 기존 기록·권한·설정이 유지되고 수동 동기화 후 걸음·심박·수면이 정상임을 확인했습니다."
 }
