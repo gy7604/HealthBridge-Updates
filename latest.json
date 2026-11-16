@@ -1,10 +1,10 @@
 {
   "packageName": "com.gy7604.healthbridge",
-  "versionCode": 13,
-  "versionName": "0.6.0",
-  "apkUrl": "https://github.com/gy7604/HealthBridge-Updates/releases/download/v0.6.0/HealthBridge-0.6.0.apk",
-  "sha256": "ae099d44a65da5900c2acbb79a63af244cebd8ca5f1e2fd067bc989dc737f266",
-  "sizeBytes": 10980641,
+  "versionCode": 16,
+  "versionName": "0.7.1",
+  "apkUrl": "https://github.com/gy7604/HealthBridge-Updates/releases/download/v0.7.1/HealthBridge-0.7.1.apk",
+  "sha256": "ed6b12456b4b6db604f2f3208c09e01af5b4fdf8a6a8cdb785bd37108c5a0491",
+  "sizeBytes": 11005217,
   "signingCertSha256": "9b76be478ce899ab17caba5282606b08d7f6feba074a94e9790017db2b77a69d",
-  "notes": "0.6.0(code13) 정식 업데이트\n\n본인 근무일 전용 조회 권한의 기간 제한·만료·철회를 합성 자료로 검증했습니다. 실제 일정 조회, 서버 건강정보 전송, ChatGPT 및 AI 연결은 꺼져 있습니다.\n\n사용자는 이 서명 APK 설치 후 기존 기록·권한·설정이 유지되고 수동 동기화 후 걸음·심박·수면이 정상임을 확인했습니다."
+  "notes": "교대근무 앱과의 본인 근무일 연결을 준비했습니다. 기기 등록·서명, 연결 해지, 일회성 조회를 합성 데이터로 검증했습니다.\n\n이 버전의 기기 등록·서명 테스트는 실제 일정이나 건강정보를 읽지 않습니다. 실제 일정 연결, 건강정보 서버 전송, ChatGPT·AI 연동은 비활성 상태입니다.\n\n기존 앱에서 업데이트할 수 있도록 앱 패키지와 서명 인증서, 권한 선언을 유지했습니다."
 }
