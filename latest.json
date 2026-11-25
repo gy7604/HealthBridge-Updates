@@ -1,10 +1,10 @@
 {
   "packageName": "com.gy7604.healthbridge",
-  "versionCode": 16,
-  "versionName": "0.7.1",
-  "apkUrl": "https://github.com/gy7604/HealthBridge-Updates/releases/download/v0.7.1/HealthBridge-0.7.1.apk",
-  "sha256": "ed6b12456b4b6db604f2f3208c09e01af5b4fdf8a6a8cdb785bd37108c5a0491",
-  "sizeBytes": 11005217,
+  "versionCode": 17,
+  "versionName": "0.8.0",
+  "apkUrl": "https://github.com/gy7604/HealthBridge-Updates/releases/download/v0.8.0/HealthBridge-0.8.0.apk",
+  "sha256": "185c36214856a50988d19b7da72fa84f74fecf2d5b98d18fd518624f120dff8f",
+  "sizeBytes": 11021601,
   "signingCertSha256": "9b76be478ce899ab17caba5282606b08d7f6feba074a94e9790017db2b77a69d",
-  "notes": "교대근무 앱과의 본인 근무일 연결을 준비했습니다. 기기 등록·서명, 연결 해지, 일회성 조회를 합성 데이터로 검증했습니다.\n\n이 버전의 기기 등록·서명 테스트는 실제 일정이나 건강정보를 읽지 않습니다. 실제 일정 연결, 건강정보 서버 전송, ChatGPT·AI 연동은 비활성 상태입니다.\n\n기존 앱에서 업데이트할 수 있도록 앱 패키지와 서명 인증서, 권한 선언을 유지했습니다."
+  "notes": "- 교대근무 앱에서 본인 일정 연결 코드를 발급받아 날짜별 근무 유형을 가져올 수 있습니다.\n- 앱에 Gemini API 키를 등록해 건강 브리핑 문장 형식을 선택할 수 있습니다. 건강 수치와 근무 일정은 휴대폰에서 처리합니다."
 }
