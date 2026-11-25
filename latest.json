@@ -1,10 +1,10 @@
 {
   "packageName": "com.gy7604.healthbridge",
-  "versionCode": 17,
-  "versionName": "0.8.0",
-  "apkUrl": "https://github.com/gy7604/HealthBridge-Updates/releases/download/v0.8.0/HealthBridge-0.8.0.apk",
-  "sha256": "185c36214856a50988d19b7da72fa84f74fecf2d5b98d18fd518624f120dff8f",
-  "sizeBytes": 11021601,
+  "versionCode": 18,
+  "versionName": "0.9.0",
+  "apkUrl": "https://github.com/gy7604/HealthBridge-Updates/releases/download/v0.9.0/HealthBridge-0.9.0.apk",
+  "sha256": "5b757854bf45750c8bcc73805fa6a85048c5b9797f07e2703b55912fa024db7f",
+  "sizeBytes": 14570989,
   "signingCertSha256": "9b76be478ce899ab17caba5282606b08d7f6feba074a94e9790017db2b77a69d",
-  "notes": "- 교대근무 앱에서 본인 일정 연결 코드를 발급받아 날짜별 근무 유형을 가져올 수 있습니다.\n- 앱에 Gemini API 키를 등록해 건강 브리핑 문장 형식을 선택할 수 있습니다. 건강 수치와 근무 일정은 휴대폰에서 처리합니다."
+  "notes": "- 같은 일간·주간·월간 기록으로 기기 내 Gemini Nano와 클라우드 Gemini의 인사이트를 비교할 수 있습니다.\n- 클라우드 분석은 보낼 집계값을 확인하고 동의한 경우에만 전송합니다.\n- 신시사이저 패널 디자인과 걸음 수 VU 미터를 적용했습니다."
 }
