@@ -1,10 +1,10 @@
 {
   "packageName": "com.gy7604.healthbridge",
-  "versionCode": 23,
-  "versionName": "0.9.5",
-  "apkUrl": "https://github.com/gy7604/HealthBridge-Updates/releases/download/v0.9.5/HealthBridge-0.9.5.apk",
-  "sha256": "1065acc17f47815e6a42d8492c0eb91e9409f949820a12053c611547af1d9b08",
-  "sizeBytes": 14583277,
+  "versionCode": 24,
+  "versionName": "0.9.6",
+  "apkUrl": "https://github.com/gy7604/HealthBridge-Updates/releases/download/v0.9.6/HealthBridge-0.9.6.apk",
+  "sha256": "b6faa294138ee6eaeb26e90d47a3254e1aa4bc677de35ea665d5f9e64edfc093",
+  "sizeBytes": 14587373,
   "signingCertSha256": "9b76be478ce899ab17caba5282606b08d7f6feba074a94e9790017db2b77a69d",
-  "notes": "- AI 건강 인사이트의 기본 엔진을 클라우드 Gemini로 설정했습니다.\n- 클라우드 연결에 문제가 생기면 같은 기록으로 기기 내 Gemini Nano 분석을 실행하고 전환 사실을 표시합니다.\n- 중복된 AI 건강 인사이트 버튼을 제거했습니다."
+  "notes": "- 앱을 홈, 기록, 설정 탭으로 정리했습니다.\n- 홈에는 주요 건강 지표와 동기화, AI 건강 인사이트를 배치했습니다.\n- 상세 기록과 설정은 필요한 항목만 펼쳐 볼 수 있습니다."
 }
