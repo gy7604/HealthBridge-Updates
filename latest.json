@@ -1,10 +1,10 @@
 {
   "packageName": "com.gy7604.healthbridge",
-  "versionCode": 19,
-  "versionName": "0.9.1",
-  "apkUrl": "https://github.com/gy7604/HealthBridge-Updates/releases/download/v0.9.1/HealthBridge-0.9.1.apk",
-  "sha256": "eac467f6c1967d25c08c7e0c7c3868623f6f40a5bb76d7f6839a50b278329284",
-  "sizeBytes": 14579181,
+  "versionCode": 22,
+  "versionName": "0.9.4",
+  "apkUrl": "https://github.com/gy7604/HealthBridge-Updates/releases/download/v0.9.4/HealthBridge-0.9.4.apk",
+  "sha256": "1f51407cef9d8319ee6dd6dcc5262225dcb68637bfae6b959a9becc8030b9d23",
+  "sizeBytes": 14583277,
   "signingCertSha256": "9b76be478ce899ab17caba5282606b08d7f6feba074a94e9790017db2b77a69d",
-  "notes": "- 홈에서 AI 건강 인사이트를 바로 열 수 있습니다.\n- 분석 설정을 한 화면에서 선택하고 Gemini 키 등록 후 분석을 이어갈 수 있습니다.\n- 차트에서 측정하지 않은 날짜를 구분하고 날짜별 기록을 확인할 수 있습니다."
+  "notes": "- 클라우드 Gemini 모델을 Gemini 3.1 Flash-Lite로 변경했습니다.\n- 클라우드 브리핑 실패 시 팝업에 HTTP 오류 번호를 표시합니다.\n- Fold7에서 기존 API 키로 클라우드 브리핑 응답을 확인했습니다."
 }
